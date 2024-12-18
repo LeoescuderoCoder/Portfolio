@@ -44,12 +44,13 @@
     <!-- Sección Proyectos -->
     <section id="proyectos" class="py-20" data-aos="fade-up">
         <div class="container mx-auto">
-            <h2 class="text-4xl text-orange-500 font-bold text-center mb-10">Projects (simulated)</h2>
+            <h2 class="text-4xl text-orange-500 font-bold text-center mb-10">Projects</h2>
 
             <!-- Proyecto 1 -->
             <div class="project mb-12 flex flex-col md:flex-row items-center">
                 <div class="md:w-1/2">
-                    <img src="img/gestor-de-libros.png" alt="Gestor de Libros" class="rounded-xl shadow-lg w-full h-64 object-cover">
+                    <img src="img/gestor-de-libros.png" alt="Gestor de Libros" class="rounded-xl shadow-lg w-full h-64 object-cover"
+                    onclick="openModal('img/gestor-de-libros.png')">
                 </div>
                 <div class="md:w-1/2 md:pl-8 mt-6 md:mt-0 text-center md:text-left">
                     <h3 class="text-2xl font-bold text-orange-500 mb-4">Gestor de Libros</h3>
@@ -60,27 +61,30 @@
             <!-- Proyecto 2 (Invertido) -->
             <div class="project mb-12 flex flex-col md:flex-row-reverse items-center">
                 <div class="md:w-1/2">
-                    <img src="proyecto2.jpg" alt="Proyecto 2" class="rounded-xl shadow-lg w-full h-64 object-cover">
+                    <img src="img/landing-page.png" alt="Proyecto 2" class="rounded-xl shadow-lg w-full h-64 object-cover"
+                    onclick="openModal('img/landing-page.png')">
                 </div>
                 <div class="md:w-1/2 md:pr-8 mt-6 md:mt-0 text-center md:text-left">
-                    <h3 class="text-2xl font-bold text-orange-500 mb-4">Proyecto 2</h3>
-                    <p class="text-gray-400">Descripción breve del proyecto 2. Incluye características clave y tecnologías utilizadas, como HTML, CSS y JavaScript.</p>
+                    <h3 class="text-2xl font-bold text-orange-500 mb-4">Landing-Page <i class="fa-solid fa-asterisk"></i></h3>
+                    <p class="text-gray-400">
+                        This is a landing page developed to promote the Red Hot Chili Peppers concert. The site is designed to attract fans of the band and provide them with information about the event, available tickets, location, and more. The design is responsive, with a focus on an engaging visual experience using a dark theme, eye-catching typography, and an image carousel displaying highlights from the concerts.
+                        Technologies used: HTML, CSS, Bootstrap 5.</p>
                 </div>
             </div>
 
             <!-- Proyecto 3 -->
             <div class="project mb-12 flex flex-col md:flex-row items-center">
                 <div class="md:w-1/2">
-                    <img src="proyecto3.jpg" alt="Proyecto 3" class="rounded-xl shadow-lg w-full h-64 object-cover">
+                    <img src="img/formulario de consulta.png" alt="Proyecto 3" class="rounded-xl shadow-lg w-full h-64 object-cover"
+                    onclick="openModal('img/formulario de consulta.png')">
                 </div>
                 <div class="md:w-1/2 md:pl-8 mt-6 md:mt-0 text-center md:text-left">
-                    <h3 class="text-2xl font-bold text-orange-500 mb-4">Proyecto 3</h3>
-                    <p class="text-gray-400">Descripción breve del proyecto 3. Destaca los objetivos principales y las herramientas empleadas, como frameworks o librerías específicas.</p>
+                    <h3 class="text-2xl font-bold text-orange-500 mb-4">E-commerce platform</h3>
+                    <p class="text-gray-400">Tech Gold is an e-commerce platform focused on the sale of technology products. It offers an intuitive and dynamic shopping experience, allowing users to explore products, add items to their cart, and complete purchases seamlessly.</p>
                 </div>
             </div>
         </div>
     </section>
-
 
     <!-- Conocimientos -->
     <section id="conocimientos" class="py-20" data-aos="fade-up">
@@ -96,7 +100,7 @@
             <h2 class="text-4xl text-orange-500 font-bold mb-10">Contact</h2>
             <p class="text-xl text-gray-400 mb-8">If you are interested in working with me, please feel free to contact me.</p>
             <a href="mailto:leoescudero_2012@hotmail.com" target="_blank" class="bg-gray-500 text-white py-3 px-8 rounded-full hover:bg-gray-600 transition-all transform hover:scale-105 mt-4">Send Email</a>
-            <a href="https://wa.me/2983564090" target="_blank" class="bg-green-500 text-white py-3 px-8 rounded-full hover:bg-green-600 transition-all transform hover:scale-105 mt-4">WhatsApp</a>
+            <a href="https://wa.me/+5492983564090" target="_blank" class="bg-green-500 text-white py-3 px-8 rounded-full hover:bg-green-600 transition-all transform hover:scale-105 mt-4"><i class="fa-brands fa-whatsapp"></i> WhatsApp</a>
         </div>
     </section>
 
@@ -108,6 +112,21 @@
         </div>
     </section>
 
+    <button id="back-to-top" class="fixed bottom-5 right-5 bg-orange-500 text-white p-3 rounded-full shadow-lg text-2xl hidden hover:bg-orange-600 transition">
+        <i class="fa-solid fa-arrow-up-from-bracket"></i>
+    </button>
+
+    <div id="image-modal" class="fixed inset-0 bg-black bg-opacity-80 hidden flex items-center justify-center z-50">
+        <div class="relative">
+            <!-- Imagen ampliada -->
+            <img id="modal-image" alt="Imagen ampliada" class="max-w-full max-h-screen rounded-lg">
+            <!-- Botón de cierre -->
+            <button onclick="closeModal()" style="position: absolute; top: 10px; right: 10px; color: white; font-size: 24px;">
+                &times;
+            </button>
+        </div>
+    </div>
+
     <!-- Inicialización de AOS -->
     <script>
         AOS.init({
@@ -115,6 +134,53 @@
             once: true
         });
     </script>
+
+    <!-- Comportamiento del back-to-top -->
+    <script>
+        // Referencia al botón
+        const backToTopButton = document.getElementById("back-to-top");
+
+        // Mostrar el botón al hacer scroll
+        window.addEventListener("scroll", () => {
+            if (window.scrollY > 300) {
+                backToTopButton.style.display = "block";
+            } else {
+                backToTopButton.style.display = "none";
+            }
+        });
+
+        // Volver al inicio al hacer clic
+        backToTopButton.addEventListener("click", () => {
+            window.scrollTo({
+                top: 0,
+                behavior: "smooth" // Desplazamiento suave
+            });
+        });
+    </script>
+
+    <script>
+        function openModal(imageSrc) {
+            const modal = document.getElementById("image-modal");
+            const modalImage = document.getElementById("modal-image");
+            // Establece la imagen seleccionada
+            modalImage.src = imageSrc;
+
+            modal.classList.remove("hidden"); // Muestra el modal
+        }
+
+        function closeModal() {
+            const modal = document.getElementById("image-modal");
+            modal.classList.add("hidden"); // Oculta el modal
+        }
+
+        // Cierra el modal al hacer clic fuera de la imagen
+        document.getElementById("image-modal").addEventListener("click", (e) => {
+            if (e.target === e.currentTarget) {
+                closeModal();
+            }
+        });
+    </script>
+
 </body>
 
 </html>
